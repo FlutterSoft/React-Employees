@@ -5,7 +5,7 @@ import EditIcon from './imgs/edit.png'
 
 export default function Table( {data, setData, search}){
 
-    const [sorts, setSorts] = useState({firstName: false, lastName: false, email: false, jobTitle: false})
+    const [sorts, setSorts] = useState({id: false, firstName: false, lastName: false, email: false, jobTitle: false})
 
     const [editing, setEditing] = useState(false)
     function handleSortFirstName(){
@@ -16,7 +16,7 @@ export default function Table( {data, setData, search}){
         }
         else{
             sorted.sort((a,b) => a.first_name.localeCompare(b.first_name))
-            setSorts({...sorts, firstName: true, lastName: false, email: false, jobTitle: false})
+            setSorts({...sorts, id: false, firstName: true, lastName: false, email: false, jobTitle: false})
         }
         setData(sorted)
     }
@@ -29,7 +29,7 @@ export default function Table( {data, setData, search}){
         }
         else{
             sorted.sort((a,b) => a.last_name.localeCompare(b.last_name))
-            setSorts({...sorts, firstName: false, lastName: true, email: false, jobTitle: false}) 
+            setSorts({...sorts, id: false, firstName: false, lastName: true, email: false, jobTitle: false}) 
         }
         setData(sorted)
     }
@@ -42,7 +42,7 @@ export default function Table( {data, setData, search}){
         }
         else{
             sorted.sort((a,b) => a.email.localeCompare(b.email))
-            setSorts({...sorts, firstName: false, lastName: false, email: true, jobTitle: false})  
+            setSorts({...sorts, id: false, firstName: false, lastName: false, email: true, jobTitle: false})  
         }
         setData(sorted)
     }
@@ -55,9 +55,22 @@ export default function Table( {data, setData, search}){
         }
         else{
             sorted.sort((a,b) => a.job_title.localeCompare(b.job_title))
-            setSorts({...sorts, firstName: false, lastName: false, email: false, jobTitle: true})   
+            setSorts({...sorts, id: false, firstName: false, lastName: false, email: false, jobTitle: true})   
         }
         setData(sorted)
+    }
+
+    function handleSortId(){
+      let sorted = [...data]
+      if(sorts.id){
+          sorted.sort((a,b) => b.id - a.id)
+          setSorts({...sorts, id: false})
+      }
+      else{
+          sorted.sort((a,b) => a.id - b.id)
+          setSorts({...sorts, id: true, firstName: false, lastName: false, email: false, jobTitle: false})   
+      }
+      setData(sorted)      
     }
     
     function handleDelete(e){
@@ -124,7 +137,7 @@ export default function Table( {data, setData, search}){
         <table>
           <tbody>
             <tr>
-              <th>ID</th>
+              <th onClick={handleSortId}>ID</th>
               <th onClick={handleSortFirstName}>First Name</th>
               <th onClick={handleSortLastName} >Last Name</th>
               <th onClick={handleSortEmail}>Email</th>
