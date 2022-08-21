@@ -1,18 +1,18 @@
 import React from 'react'
 import { useState } from 'react'
+import DeleteIcon from './imgs/delete.png'
+import EditIcon from './imgs/edit.png'
+
 export default function Table( {data, setData, search}){
 
     const [sorts, setSorts] = useState({firstName: false, lastName: false, email: false, jobTitle: false})
-    // const [firstNameSort, setFirstNameSort] = useState(false)
-    // const [lastNameSort, setLastNameSort] = useState(false)
-    // const [emailSort, setEmailSort] = useState(false)
-    // const [jobTitleSort, setJobTitleSort] = useState(false)
 
+    const [editing, setEditing] = useState(false)
     function handleSortFirstName(){
-        let sorted = [...data]
+      let sorted = [...data]
         if(sorts.firstName){
-            sorted.sort((a,b) => b.first_name.localeCompare(a.first_name))
-            setSorts({...sorts, firstName: false})
+          sorted.sort((a,b) => b.first_name.localeCompare(a.first_name))
+          setSorts({...sorts, firstName: false})
         }
         else{
             sorted.sort((a,b) => a.first_name.localeCompare(b.first_name))
@@ -20,6 +20,7 @@ export default function Table( {data, setData, search}){
         }
         setData(sorted)
     }
+    
     function handleSortLastName(){
         let sorted = [...data]
         if(sorts.lastName){
@@ -32,6 +33,7 @@ export default function Table( {data, setData, search}){
         }
         setData(sorted)
     }
+    
     function handleSortEmail(){
         let sorted = [...data]
         if(sorts.email){
@@ -44,6 +46,7 @@ export default function Table( {data, setData, search}){
         }
         setData(sorted)
     }
+    
     function handleSortJobTitle(){
         let sorted = [...data]
         if(sorts.jobTitle){
@@ -56,6 +59,30 @@ export default function Table( {data, setData, search}){
         }
         setData(sorted)
     }
+    
+    function handleDelete(e){
+      let selection = e.target.parentNode.childNodes[0].innerText
+      let newData = data.filter(employee => employee.id !== Number(selection))
+      console.log(newData)
+      setData(newData)
+    }
+
+    function handleEdit(e){
+      setEditing(!editing)
+      if(editing){
+        const current = {id: Number(e.target.parentNode.childNodes[0].innerText), first_name: e.target.parentNode.childNodes[1].innerText, last_name: e.target.parentNode.childNodes[2].innerText, email: e.target.parentNode.childNodes[3].innerText, job_title: e.target.parentNode.childNodes[4].innerText}
+        e.target.parentNode.childNodes[1].innerHTML=`<input placeholder=${current.first_name} />`
+        e.target.parentNode.childNodes[2].innerHTML=`<input placeholder=${current.last_name} />`
+        e.target.parentNode.childNodes[3].innerHTML=`<input placeholder=${current.email} />`
+        e.target.parentNode.childNodes[4].innerHTML=`<input placeholder=${current.job_title} />`
+      }
+
+      else{
+        // save the current values back to the data object
+      }
+    }
+
+
     // filter data for rows
     const rows = data.filter(employee => {
         return (
@@ -78,10 +105,17 @@ export default function Table( {data, setData, search}){
       }).map(employee => {
           return(
             <tr key={employee.id}>
+              <td>{employee.id}</td>
               <td>{employee.first_name}</td>
               <td>{employee.last_name}</td>
               <td>{employee.email}</td>
               <td>{employee.job_title}</td>
+              <td className="tableIconContainer" onClick={handleEdit}>
+                <img className="icon"  src={EditIcon}/>
+              </td>
+              <td className="tableIconContainer" onClick={handleDelete}>
+                <img className="icon" src={DeleteIcon}/>
+              </td>
             </tr>
           )
       })
@@ -90,10 +124,13 @@ export default function Table( {data, setData, search}){
         <table>
           <tbody>
             <tr>
+              <th>ID</th>
               <th onClick={handleSortFirstName}>First Name</th>
               <th onClick={handleSortLastName} >Last Name</th>
               <th onClick={handleSortEmail}>Email</th>
               <th onClick={handleSortJobTitle} >Job Title</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
             {rows}
           </tbody>

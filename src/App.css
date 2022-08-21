@@ -40,6 +40,7 @@ p{
 input{
   margin: 1em;
   padding: 0.5em;
+  width: 8em;
 }
 
 /* ----------------
@@ -65,6 +66,13 @@ th{
   width: 25%;
   cursor: pointer;
 }
+th:first-child{
+  width: 5%;
+}
+
+tr{
+  height: 2em;
+}
 
 tr:nth-child(even){
   background-color: rgb(226, 225, 225);
@@ -74,21 +82,45 @@ tr:nth-child(odd){
   background-color: #9a9a9a;
 }
 
+.tableIconContainer{
+  text-align: center;
+  cursor: pointer;
+}
+
+.tableIconContainer:hover{
+  opacity: 70%;
+}
+
+table input{
+  margin: 0;
+  padding: 2px;
+  width: 80%;
+}
+
+.icon{
+  max-width: 70%;
+  max-height: 25px;
+  pointer-events: none;
+}
 
 button{
-  background-color: #d0d2d7;
+  background-color: white;
   padding: 0.5em;
   color: #282c34;
   border: none;
   cursor: pointer;
   margin: 0.3em;
-  margin-left: 2.5%;
   border-radius: 2px;
-  align-self: flex-start;
+  align-self: flex-end;
 }
-button:active{
-  transform: scale(0.99);
+input[type=submit]{
+  cursor:pointer;
 }
+
 button:hover{
-  background-color: rgba(255, 255, 255, 0.903);
+  opacity: 95%;
+}
+
+.resetBtn{
+  background-color: #d0d2d7;
 }
