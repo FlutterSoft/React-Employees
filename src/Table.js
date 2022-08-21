@@ -76,7 +76,6 @@ export default function Table( {data, setData, search}){
     function handleDelete(e){
       let selection = e.target.parentNode.childNodes[0].innerText
       let newData = data.filter(employee => employee.id !== Number(selection))
-      console.log(newData)
       setData(newData)
     }
 

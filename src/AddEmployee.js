@@ -3,6 +3,7 @@ import React from 'react'
 export default function AddEmployee( {data, setData}){
 
     function handleSubmit(e){
+        // figure out how to prevent duplicates
         e.preventDefault()
         const newData = data[0].first_name != '' ? [...data] : []
         const nextId = Math.max(...data.map(x => x.id))+1
@@ -16,7 +17,6 @@ export default function AddEmployee( {data, setData}){
         newData.push(newEmployee)
         setData(newData)
       }
-
 
     return (
         <form onSubmit={handleSubmit}>
