@@ -1,3 +1,8 @@
+/* ----------------
+        App 
+   ----------------
+*/  
+
 .App {
   text-align: center;
   background-color: #282c34;
@@ -9,28 +14,81 @@
   color: white;
 }
 
+
+/* ----------------
+        TYPOGRAPHY 
+   ----------------
+*/  
 .App-link {
   color: #61dafb;
 }
 
+h1{
+  margin: 0.5em;
+}
+
+
+/* ----------------
+        SPACING 
+   ----------------
+*/  
+p{
+  font-size: 1rem;
+  margin: 0.5em;
+}
+
+input{
+  margin: 1em;
+  padding: 0.5em;
+}
+
+/* ----------------
+        TABLE 
+   ----------------
+*/   
 table{
   font-size: 1rem;
   border-collapse: collapse;
   width: 95%;
   margin: 2.5%;
+  margin-top:0;
   color: #282c34;
 }
+
 td, th{
   border: 1px solid grey;
   text-align: left;
   padding: 8px;
 }
+
 th{
   width: 25%;
+  cursor: pointer;
 }
+
 tr:nth-child(even){
   background-color: rgb(226, 225, 225);
 }
+
 tr:nth-child(odd){
   background-color: #9a9a9a;
+}
+
+
+button{
+  background-color: #d0d2d7;
+  padding: 0.5em;
+  color: #282c34;
+  border: none;
+  cursor: pointer;
+  margin: 0.3em;
+  margin-left: 2.5%;
+  border-radius: 2px;
+  align-self: flex-start;
+}
+button:active{
+  transform: scale(0.99);
+}
+button:hover{
+  background-color: rgba(255, 255, 255, 0.903);
 }
